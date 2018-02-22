@@ -1,6 +1,8 @@
 from flask import Flask
-app = Flask(__name__)
+from flask_restful import Api
+from planetsapi.resources.planets import Planets
 
-@app.route('/')
-def empty_page():
-    return "No content"
+app = Flask(__name__)
+api = Api(app)
+
+api.add_resource(Planets, '/planets')

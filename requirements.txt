@@ -1,3 +1,4 @@
+aniso8601==2.0.0
 astroid==1.6.1
 attrs==17.4.0
 certifi==2018.1.18
@@ -7,6 +8,7 @@ coverage==4.5.1
 coveralls==1.2.0
 docopt==0.6.2
 Flask==0.12.2
+Flask-RESTful==0.3.6
 idna==2.6
 isort==4.3.4
 itsdangerous==0.24
@@ -19,6 +21,7 @@ py==1.5.2
 pylint==1.8.2
 pymongo==3.6.0
 pytest==3.4.1
+pytz==2018.3
 requests==2.18.4
 six==1.11.0
 urllib3==1.22
