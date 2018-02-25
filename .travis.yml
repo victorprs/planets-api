@@ -2,6 +2,6 @@ language: python
 python: 
   - 3.6
 script:
-  - pytest
+  - pytest && coverage run --source=resources resources/* test
 after_success:
   - coveralls
