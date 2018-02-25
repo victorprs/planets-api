@@ -4,5 +4,5 @@ python:
 script:
   - pytest
 after_success:
-  - PYTHONPATH=../ coverage run --source=resources resources/* test
+  - PYTHONPATH=../ coverage run --source=resources setup.py test
   - coveralls
