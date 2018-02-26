@@ -7,7 +7,7 @@ setup(
     url='https://github.com/victorprs/planetsapi',
     description='Star Wars Planets Api',
     license='MIT',
-    packages=['resources',],
+    packages=['resources', ],
     zip_safe=True,
     test_suite='tests'
 )
