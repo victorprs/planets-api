@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
-from planetsapi.resources.planets_db_access import PlanetsDbAccess
 from bson.errors import InvalidId
+from planetsapi.resources.planets_db_access import PlanetsDbAccess
 
 
 class Planets(Resource):
@@ -19,8 +19,7 @@ class Planets(Resource):
             return 'Search for id OR for name', 400
         elif obj_id_value:
             return self.get_by_id(obj_id_value)
-        else:
-            return self.get_all()
+        return self.get_all()
 
     def get_all(self):
         cursor = self.planets_dao.find_all()
@@ -54,16 +53,7 @@ class Planets(Resource):
         return str(object_id), 201
 
 
-class PlanetByName(Resource):
-
-    def get(self, name):
-        return name
-
-
 class PlanetById(Resource):
-
-    def get(self, object_id):
-        return object_id
 
     def delete(self, object_id):
         return '', 204

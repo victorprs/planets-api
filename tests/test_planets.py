@@ -36,6 +36,10 @@ class PlanetsTest(unittest.TestCase):
         response = self.app.get('/planets?object_id=123456')
         assert 400 == response.status_code
 
+    def test_get_planet_by_id_and_name_return_400(self):
+        response = self.app.get('/planets?object_id=123456&name=abc')
+        assert 400 == response.status_code
+
     def test_delete_planet_by_id(self):
         response = self.app.get('/planets/12')
         assert b'' in response.data
