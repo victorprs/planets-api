@@ -3,6 +3,7 @@ python:
   - 3.6
 env:
   - SWAPI_DB_NAME=test
+services: mongodb
 script:
   - pytest
 after_success:
