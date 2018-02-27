@@ -20,3 +20,7 @@ class PlanetsDbAccess:
     def find_by_id(self, object_id):
         result = self.db.planets.find({"_id": ObjectId(object_id)})
         return result
+
+    def find_by_name(self, name):
+        result = self.db.planets.find({"name": name})
+        return result

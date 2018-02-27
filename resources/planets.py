@@ -19,6 +19,8 @@ class Planets(Resource):
             return 'Search for id OR for name', 400
         elif obj_id_value:
             return self.get_by_id(obj_id_value)
+        elif name_value:
+            return self.get_by_name(name_value)
         return self.get_all()
 
     def get_all(self):
@@ -42,6 +44,15 @@ class Planets(Resource):
             return object_id + ' is not a valid ObjectId, it must be a 12-byte input or a 24-character hex string', 400
         except StopIteration:
             return object_id + ' was not found', 404
+
+    def get_by_name(self, name):
+        try:
+            planet = self.planets_dao.find_by_name(name).next()
+            planet['object_id'] = str(planet['_id'])
+            planet.pop('_id')
+            return planet
+        except StopIteration:
+            return name + ' was not found', 404
 
     def post(self):
         parser = reqparse.RequestParser()
