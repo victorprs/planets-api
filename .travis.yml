@@ -5,6 +5,7 @@ env:
   - SWAPI_DB_NAME=test
 services: mongodb
 script:
+  - mongo < tests/BuildDbTestScript.js
   - pytest
 after_success:
   - PYTHONPATH=../ coverage run --source=resources setup.py test
