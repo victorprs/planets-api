@@ -6,9 +6,9 @@ class PlanetsTest(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
 
-    def test_get_tatooine(self):
+    def test_get_planets(self):
         response = self.app.get('/planets')
-        assert b'Tatooine' in response.data
+        assert b'[]' in response.data
 
     def test_get_planet_by_name(self):
         response = self.app.get('/planets/Tatooine')

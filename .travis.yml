@@ -1,6 +1,8 @@
 language: python
 python: 
   - 3.6
+env:
+  - SWAPI_DB_NAME=test
 script:
   - pytest
 after_success:
