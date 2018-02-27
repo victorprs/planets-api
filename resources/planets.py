@@ -65,6 +65,13 @@ class Planets(Resource):
 
 
 class PlanetById(Resource):
+    def __init__(self):
+        self.planets_dao = PlanetsDbAccess()
 
     def delete(self, object_id):
-        return '', 204
+        try:
+            asd = self.planets_dao.delete(object_id)
+            print(asd)
+            return '', 204
+        except InvalidId:
+            return object_id + ' is not a valid ObjectId, it must be a 12-byte input or a 24-character hex string', 400

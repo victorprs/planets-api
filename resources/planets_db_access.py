@@ -24,3 +24,7 @@ class PlanetsDbAccess:
     def find_by_name(self, name):
         result = self.db.planets.find({"name": name})
         return result
+
+    def delete(self, object_id):
+        result = self.db.planets.delete_one({"_id": ObjectId(object_id)})
+        return result

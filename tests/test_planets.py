@@ -44,6 +44,10 @@ class PlanetsTest(unittest.TestCase):
         response = self.app.get('/planets?name=Bob')
         assert 404 == response.status_code
 
-    def test_delete_planet_by_id(self):
-        response = self.app.get('/planets/12')
-        assert b'' in response.data
+    def test_zdelete_planet_by_id_return_204_no_content(self):
+        response = self.app.delete('/planets/5a959ef17ef03fc0da5bc177')
+        assert 204 == response.status_code
+
+    def test_delete_planet_by_invalid_id_return_400(self):
+        response = self.app.delete('/planets/asdfasdf')
+        assert 400 == response.status_code
