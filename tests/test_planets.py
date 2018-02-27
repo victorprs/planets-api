@@ -12,6 +12,14 @@ class PlanetsTest(unittest.TestCase):
         assert b'"name": "Coruscant", "climate": "humid", "terrain": "cityscape"' in response.data
         assert b'"name": "Hoth", "climate": "frozen", "terrain": "ice caves"' in response.data
 
+    def test_post_planet(self):
+        response = self.app.post('/planets', data=dict(
+            name="Kamino",
+            climate="temperate",
+            terrain="ocean"
+        ))
+        assert 201 == response.status_code
+
     def test_get_planet_by_name(self):
         response = self.app.get('/planets/Tatooine')
         assert b'Tatooine' in response.data
