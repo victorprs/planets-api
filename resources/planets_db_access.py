@@ -10,3 +10,7 @@ class PlanetsDbAccess:
     def insert_planet(self, planet):
         result = self.db.planets.insert_one(planet)
         return result.inserted_id
+    
+    def find_all(self):
+        result = self.db.planets.find()
+        return result

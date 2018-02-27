@@ -7,7 +7,14 @@ class Planets(Resource):
         self.planets_dao = PlanetsDbAccess()
 
     def get(self):
-        return "Tatooine"
+        cursor = self.planets_dao.find_all()
+        result = []
+        for planet in cursor:
+            planet['object_id'] = str(planet['_id'])
+            planet.pop('_id')
+            print(type(planet))
+            result.append(planet)
+        return result
 
     def post(self):
         parser = reqparse.RequestParser()
