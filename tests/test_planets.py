@@ -21,12 +21,20 @@ class PlanetsTest(unittest.TestCase):
         assert 201 == response.status_code
 
     def test_get_planet_by_name(self):
-        response = self.app.get('/planets/Tatooine')
-        assert b'Tatooine' in response.data
+        response = self.app.get('/planets?name=Tatooine')
+        assert b'' in response.data
 
     def test_get_planet_by_id(self):
-        response = self.app.get('/planets/12')
-        assert b'12' in response.data
+        response = self.app.get('/planets?object_id=5a959ef17ef03fc0da5bc177')
+        assert b'"name": "Tatooine", "climate": "arid", "terrain": "desert"' in response.data
+
+    def test_get_planet_by_inexistent_id_return_404(self):
+        response = self.app.get('/planets?object_id=4a959ef17ef03fc0da5bc177')
+        assert 404 == response.status_code
+
+    def test_get_planet_by_invalid_id_return_400(self):
+        response = self.app.get('/planets?object_id=123456')
+        assert 400 == response.status_code
 
     def test_delete_planet_by_id(self):
         response = self.app.get('/planets/12')

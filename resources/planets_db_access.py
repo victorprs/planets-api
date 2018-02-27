@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from planetsapi.resources import db_configs
+from bson import ObjectId
 
 
 class PlanetsDbAccess:
@@ -14,4 +15,8 @@ class PlanetsDbAccess:
     
     def find_all(self):
         result = self.db.planets.find()
+        return result
+
+    def find_by_id(self, object_id):
+        result = self.db.planets.find({"_id": ObjectId(object_id)})
         return result
