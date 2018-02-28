@@ -1,3 +1,4 @@
+import requests
 from flask_restful import Resource, reqparse
 from bson.errors import InvalidId
 from planetsapi.resources.planets_db_access import PlanetsDbAccess
@@ -30,7 +31,6 @@ class Planets(Resource):
         for planet in cursor:
             planet['object_id'] = str(planet['_id'])
             planet.pop('_id')
-            print(type(planet))
             result.append(planet)
         return result
 
@@ -60,9 +60,17 @@ class Planets(Resource):
         parser.add_argument('climate')
         parser.add_argument('terrain')
         args = parser.parse_args()
+        args['films_appeared_count'] = self.__get_films_by_planet_name__(args['name'])
         object_id = self.planets_dao.insert_planet(args)
         return str(object_id), 201
 
+    def __get_films_by_planet_name__(self, name):
+        try:
+            response = requests.get("https://swapi.co/api/planets/", {"search": name})
+            result = response.json()['results'][0]
+        except (IndexError, requests.RequestException):
+            return -1
+        return len(result['films'])
 
 class PlanetById(Resource):
     def __init__(self):

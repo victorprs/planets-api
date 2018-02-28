@@ -1,4 +1,4 @@
-import unittest, os, random
+import unittest, os
 from planetsapi.server import app
 
 
@@ -18,6 +18,14 @@ class PlanetsTest(unittest.TestCase):
             name="Kamino",
             climate="temperate",
             terrain="ocean"
+        ))
+        assert 201 == response.status_code
+
+    def test_post_planet_with_no_correspodent_on_swapi(self):
+        response = self.app.post('/planets', data=dict(
+            name="Starkiller",
+            climate="frozen",
+            terrain="mountains"
         ))
         assert 201 == response.status_code
 
