@@ -1,9 +1,10 @@
-import unittest
+import unittest, os, random
 from planetsapi.server import app
 
 
 class PlanetsTest(unittest.TestCase):
     def setUp(self):
+        os.system("mongo < tests/BuildDbTestScript.js")
         self.app = app.test_client()
 
     def test_get_planets(self):
@@ -44,7 +45,7 @@ class PlanetsTest(unittest.TestCase):
         response = self.app.get('/planets?name=Bob')
         assert 404 == response.status_code
 
-    def test_zdelete_planet_by_id_return_204_no_content(self):
+    def test_delete_planet_by_id_return_204_no_content(self):
         response = self.app.delete('/planets/5a959ef17ef03fc0da5bc177')
         assert 204 == response.status_code
 
