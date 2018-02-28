@@ -1,4 +1,5 @@
-import unittest, os
+import unittest
+import os
 from planetsapi.server import app
 
 

@@ -1,6 +1,6 @@
 from pymongo import MongoClient
-from planetsapi.resources import db_configs
 from bson import ObjectId
+from planetsapi.resources import db_configs
 
 
 class PlanetsDbAccess:
@@ -12,7 +12,7 @@ class PlanetsDbAccess:
     def insert_planet(self, planet):
         result = self.db.planets.insert_one(planet)
         return result.inserted_id
-    
+
     def find_all(self):
         result = self.db.planets.find()
         return result
